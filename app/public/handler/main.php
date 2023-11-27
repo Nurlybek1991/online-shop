@@ -9,7 +9,7 @@ if (isset($_SESSION['users_id'])) {
     $products = $stmt->fetchAll();
 
 } else {
-    header('location: /login.php');
+    header('location: /login');
 }
 
 ?>
