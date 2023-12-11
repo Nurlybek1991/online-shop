@@ -2,22 +2,32 @@
 <body>
 <div class="wrapper">
     <form action="" method="POST">
-        <h1>Add product to cart</h1>
+        <h1>Login</h1>
         <div class="input-box">
-            <?php if (isset($errors['product-id'])): ?>
-                <label style="color: red"><?php echo $errors['product-id']; ?></label>
+            <?php if (isset($errors['login'])): ?>
+                <label style="color: red"><?php echo $errors['login']; ?></label>
             <?php endif; ?>
-            <input type="text" placeholder="Product id" name="product-id" required>
+            <input type="text" placeholder="Username" name="login" required>
             <i class='bx bxs-user'></i>
         </div>
         <div class="input-box">
-            <?php if (isset($errors['quantity'])): ?>
-                <label style="color: red"><?php echo $errors['quantity']; ?></label>
+            <?php if (isset($errors['password'])): ?>
+                <label style="color: red"><?php echo $errors['password']; ?></label>
             <?php endif; ?>
-            <input type="password" placeholder="Quantity" name="quantity" required>
+            <input type="password" placeholder="password" name="password" required>
             <!--            <i class='bx bxs-lock-alt'></i>-->
         </div>
-        <button type="submit" class="btn">Add product to cart</button>
+        <div class="remember-forgot">
+            <label><input type="checkbox">Remember me
+            </label>
+            <a href="#">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <div class="register-link">
+            <p>Dont't have an account? <a href="/registrate">
+                    Register
+                </a></p>
+        </div>
     </form>
 </div>
 </body>
