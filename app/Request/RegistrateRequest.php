@@ -2,25 +2,50 @@
 
 namespace Request;
 
-class LoginRequest extends Request
+class RegistrateRequest extends Request
 {
-    public function validate(): array
+    function validate(): array
     {
+
         $errors = [];
 
-        if (isset($this->body['login'])) {
-            $login = $this->body['login'];
-            if (strlen($login) < 4) {
-                $errors['login'] = 'логин должен содержать более 4 символов';
+        if (isset($this->body['name'])) {
+            $name = $this->body['name'];
+            if (strlen($name) < 2) {
+                $errors['name'] = 'Имя должно содержать более 2 символов';
             }
         } else {
-            $errors['login'] = 'Введите логин';
+            $errors['name'] = 'Введите имя';
         }
 
-        if (isset($this->body['password'])) {
-            $password = $this->body['password'];
+        if (isset($this->body['email'])) {
+            $email = $this->body['email'];
+            if (strlen($email) < 4) {
+                $errors['email'] = 'Электронная почта должна содержать более 4 символов';
+            } elseif (!strpos($email, '@')) {
+                $errors['email'] = 'Некорректная почта';
+            }
         } else {
-            $errors['password'] = 'Введите пароль';
+            $errors['email'] = 'Введите  электроннуй почту';
+        }
+
+        if (isset($this->body['psw'])) {
+            $password = $this->body['psw'];
+            if (strlen($password) < 6) {
+                $errors['psw'] = 'Пароль должен содержать 6 символов';
+            }
+        } else {
+            $errors['psw'] = 'Введите пароль';
+        }
+
+
+        if (isset($this->body['psw-repeat'])) {
+            $passwordRep = $this->body['psw-repeat'];
+            if ($password !== $passwordRep) {
+                $errors['psw-repeat'] = 'Пароли не совпадают';
+            }
+        } else {
+            $errors['psw-repeat'] = 'Введите пароль';
         }
 
         return $errors;

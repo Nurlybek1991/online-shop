@@ -1,8 +1,56 @@
 <?php
 
-namespace MyNamespace\Model;
+namespace Model;
 
-class Cart
+class Cart extends Model
 {
+    private int $id;
+    private string $name;
+    private int $userId;
 
+    public function __construct(int $id, string $name, string $userId)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->userId = $userId;
+    }
+
+    public static function getOneByUserId(int $userId): Cart|null
+    {
+        $stmt = self::getPDO()->prepare("SELECT * FROM carts WHERE user_id = :user_id");
+        $stmt->execute(['user_id' => $userId]);
+
+        $data = $stmt->fetch();
+
+        if (empty($data)) {
+            return null;
+        }
+
+        return new self($data['id'], $data['name'], $data['user_id']);
+    }
+
+    public static function create(int $userId, string $name = null): void
+    {
+        if ($name === null) {
+            $name = "cart_$userId";
+        }
+
+        $stmt = self::getPDO()->prepare("INSERT INTO carts (name, user_id) VALUES (:name, :user_id)");
+        $stmt->execute(['name' => $name, 'user_id' => $userId]);
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
 }
