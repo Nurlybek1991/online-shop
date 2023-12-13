@@ -2,6 +2,7 @@
 
 namespace Model;
 
+
 class Product extends Model
 {
     private int $id;
@@ -50,6 +51,7 @@ class Product extends Model
         }
         return $arr;
     }
+
 
     public function getId(): int
     {

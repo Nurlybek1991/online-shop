@@ -1,86 +1,280 @@
-<body>
-<header>
-    <form action="" method="POST">
-        <div class="header-cart">
-            <button type="submit" class="btn-cart">
-                <img class="img-cart"
-                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVe5NYRihVDjz5-3l1uGW1WHK_JBEuaUaI2g&usqp=CAU"
-                     alt="">
-            </button>
+<header class="header">
+    <div class="header-content">
+        <div class="header-logo">
+            <h1 class="logo">Интернет Магазин Нурика</h1>
         </div>
-    </form>
+        <nav class="header-navigation">
+            <a href="#">Мои контакты тут</a>
+            <a href="#" class="link-button"><i class="material-icons-outlined">Корзина</i></a>
+        </nav>
+    </div>
 </header>
-<h3>Online Shop</h3>
-<div class="container">
-    <div class="card-deck">
-        <?php /** @var TYPE_NAME $products */
-        foreach ($products as $product): ?>
-            <div class="card text-center">
-                <div class="card-header">
-                    Hit!
-                    <a href="#">
-                        <img class="card-img-top"
-                             src=<?php echo $product->getImage(); ?> alt="Card image">
-                        <div class="card-body">
-                            <p class="card-text text-muted"><?php echo $product->getName(); ?></p>
-                            <a><h5 class="card-title">Very long item name</h5></a>
-                            <div class="card-footer">
-                                <?php echo $product->getPrice() . " tng"; ?>
+<main>
+    <div class="responsive-container">
+        <div class="grid">
+            <div class="grid-column">
+                <?php /** @var TYPE_NAME $products */
+                foreach ($products as $product): ?>
+                    <a class="product" href="#">
+                        <div class="product-image">
+                            <img src=<?php echo $product->getImage(); ?>/>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <h2 class="product-title"><?php echo $product->getName(); ?></h2>
+                                <p class="product-price"> <?php echo $product->getPrice() . " тенге"; ?></p>
                                 <input type="text" placeholder="product_id" name="product_id" hidden=""
                                        value="<?php echo $product->getId(); ?>">
-                                <input type="text" placeholder="quantity" name="quantity">
+                                <input type="text" placeholder="Количество" name="quantity">
+                                <a href="/cart"><button type="submit" class="btn">Добавить в корзину</button>
                             </div>
-                            <a href="/main">
-                                <button type="submit" class="btn">Add to cart</button>
+<!--                            <button class="product-action"><i class="material-icons-outlined"></i></button>-->
                         </div>
                     </a>
-                </div>
+                <?php endforeach; ?>
             </div>
-        <?php endforeach; ?>
+        </div>
     </div>
-</div>
-
+    <div class="credits">
+        <div class="responsive-container">
+            <h3>Посмотри на мой канал, если лень</h3>
+            <a href='https://www.youtube.com/channel/UC2wLFuyXSYj8lww94TjtHHg' target="_blank">Ваще ничего нету тут -
+                www.youtube.com</a>
+        </div>
+    </div>
+</main>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    ul,
+    ol,
+    li,
+    figure,
+    figcaption,
+    blockquote,
+    dl,
+    dd {
+        margin: 0;
+    }
+
     body {
-        font-style: sans-serif;
+        scroll-behavior: smooth;
+        line-height: 1.5;
+        background-color: #FFF;
+    }
+
+    img {
+        max-width: 100%;
+        display: block;
     }
 
     a {
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: none;
-    }
-
-    h3 {
-        line-height: 3em;
-    }
-
-    .card {
-        max-width: 16rem;
-    }
-
-    .card:hover {
-        box-shadow: 1px 2px 10px lightgray;
-        transition: 0.2s;
-    }
-
-    .card-header {
-        font-size: 13px;
-        color: gray;
-        background-color: white;
-    }
-
-    .text-muted {
-        font-size: 11px;
-    }
-
-    .card-footer {
+        color: inherit;
         font-weight: bold;
-        font-size: 18px;
-        background-color: white;
+    }
+
+    input,
+    button,
+    textarea,
+    select {
+        font: inherit;
+    }
+
+    button {
+        border: 1px solid;
+        background-color: transparent;
+    }
+
+    /
+    /
+    The code
+    body {
+        font-family: "DM Sans", sans-serif;
+    }
+
+    .responsive-container {
+        max-width: 1080px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .header {
+        border-bottom: 1px solid #d0d0d0;
+        min-height: 60px;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .header-content {
+        display: flex;
+        width: 100%;
+        max-width: 2000px;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header-navigation {
+        display: flex;
+        align-items: center;
+
+        a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+    }
+
+    .link-button {
+        display: flex;
+        align-items: center;
+        background-color: #000;
+        border-radius: 0.375rem;
+        padding: 0.5em 1.25em;
+        color: #fff;
+
+        i {
+            font-size: 1.25rem;
+            margin-left: 0.5rem;
+        }
+    }
+
+    .logo {
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+    main {
+        padding-top: 2rem;
+        padding-bottom: 6rem;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .grid-column {
+        display: flex;
+        flex-direction: column;
+
+        & > * + * {
+            margin-top: 2rem;
+        }
+    }
+
+    .product {
+        border-radius: 0.25rem;
+        text-decoration: none;
+        font-weight: 400;
+        transition: .15s ease;
+        overflow: hidden;
+
+        &:hover, &:focus {
+            outline: none;
+            box-shadow: 0 0 0 0.25rem pink;
+
+            .product-content {
+                border-color: transparent;
+            }
+        }
+    }
+
+    .product-image {
+        border-radius: 0.25rem 0.25rem 0 0;
+        overflow: hidden;
+    }
+
+    .product-content {
+        padding: 1rem;
+        border-left: 1px solid #dedede;
+        border-right: 1px solid #dedede;
+        border-bottom: 1px solid #dedede;
+        border-radius: 0 0 0.25rem 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: .15s ease;
+        background-color: #FFF;
+    }
+
+    .product-action {
+        color: #000;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: .25rem;
+        font-size: 1.25rem;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: .15s ease;
+
+        &:hover {
+            background-color: #ebebeb;
+        }
+    }
+
+    .product-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-title {
+        font-size: 1.125rem;
+        line-height: 1.25;
+    }
+
+    .product-price {
+        margin-top: .25rem;
+    }
+
+    .credits {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin-top: 10rem;
+        color: #777;
+        font-size: .875rem;
+
+        a {
+            display: block;
+        }
+    }
+
+    @media all and (max-width: 600px) {
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-column {
+            & > * + * {
+                margin-top: 1.5rem;
+            }
+        }
     }
 
 </style>

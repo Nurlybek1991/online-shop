@@ -14,7 +14,7 @@ class CartController
 {
         public function getAddProduct(): void
     {
-        require_once '../View/main.phtml';
+        require_once '../View/main3.phtml';
     }
     public function postAddProduct(ProductRequest $request): void
     {
